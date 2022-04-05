@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid;
+            text-align: center;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<table id="display"></table>
+<p id="sum"></p>
+<script>
+    let row = 10;
+    let col = 10;
+    let result = "";
+    let display = document.getElementById("display");
+    let turn = "X";
+    let sum = 0;
+    let arr = new Array(row); // tạo mảng có row phần tử
+    for (let i = 0; i < row; i++) {
+        arr[i] = new Array(col); // mỗi phần tử là 1 mảng, mảng con có col phần tử
+        result += "<tr>";
+        for (let j = 0; j < col; j++) {
+            let number = Math.floor((Math.random() + 0.1) * 100);
+            arr[i][j] = `<td id="cell-${j}-${i}" onclick="playGame(this, ${j}, ${i})" data-value="${number}" >${number}</td>`;
+            console.log(typeof arr[i][j]);
+            sum += number;
+        }
+        result += arr[i].join("");
+        result += "</tr>";
+    }
+    display.innerHTML = result;
+    document.getElementById("sum").innerText = "Tổng giá phòng là: " + sum;
+
+    function playGame(cell, x, y) {
+        // nếu ô đấy màu đỏ thì không cho chọn nữa, thoát hàm luôn
+        if (cell.style.backgroundColor === "red") {
+            return;
+        }
+        // cell: this node
+        // x : tọa độ trục x của ô
+        // y: tọa độ trục y của ô
+        let sum2 = +cell.innerText;
+        cell.innerText = 0;
+        for (let i = 0; i < row - y; i++) {
+            let cell2 = document.getElementById(`cell-${x}-${y + i}`);
+            cell2.style = "background-color: red; color: white";
+            sum2 += +cell2.innerText;
+            if (i > 0 && +cell2.innerText === 0) {
+                break;
+            }
+        }
+        console.log(sum2);
+        sum -= sum2;
+        document.getElementById("sum").innerText = "Tổng giá phòng là: " + sum;
+    }
+</script>
+</body>
+</html>

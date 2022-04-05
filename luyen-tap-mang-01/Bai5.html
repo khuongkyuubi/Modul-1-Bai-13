@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    const arr= [5,12,-3,5,-15,45,-10,22,-3,5,10];
+    let length = arr.length;
+    let count = 0;
+    for (let i = 0; i < length; i++) {
+        if (arr[i] < 0) {
+            console.log(arr[i]);
+            count++;
+        }
+    }
+    console.log("Có " + count + " số nguyên âm trong mảng" );
+</script>
+</html>

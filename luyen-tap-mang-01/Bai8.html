@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    // Sắp xếp giảm dần
+    const arr = [5, 12, 3, 5, 15, 45, 10, 22, 3, 5, 10];
+    console.log(arr);
+    let length = arr.length;
+    let max = 0;
+    let temp = 0;
+    let index = 0;
+    for (let i = 0; i < length ; i++) {
+        max = arr[i];
+        console.log(max);
+        for (let j = i; j < length; j++) {
+            if (arr[j] > max) {
+                max = arr[j]
+                index = j;
+            }
+        }
+        // tráo đổi vị trí a[i] và max , hay đẩy max lần lượt về phía trái
+        temp = arr[i];
+        arr[i] = max;
+        arr[index] = temp;
+    }
+    console.log(arr);
+
+</script>
+</html>

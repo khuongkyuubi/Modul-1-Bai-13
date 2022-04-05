@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid;
+            text-align: center;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<table id="display"></table>
+<button type="submit" onclick="drawTable()">Reset</button>
+
+<!--<button type="submit" id="changeValue" onclick="changeValue()">Change Value</button>-->
+
+<script>
+    let display = document.getElementById("display");
+    let row = 10;
+    let col = 10;
+    let turn = "X";
+    drawTable();
+
+    function drawTable() {
+        let result = "";
+        let arr = new Array(row); // tạo mảng có row phần tử
+        for (let i = 0; i < row; i++) {
+            arr[i] = new Array(col); // mỗi phần tử là 1 mảng, mảng con có col phần tử
+            result += "<tr>";
+            for (let j = 0; j < col; j++) {
+                arr[i][j] = `<td id="cell-${j}-${i}" onclick="playGame(this, ${j}, ${i})" ></td>`;
+            }
+            result += arr[i].join("");
+            result += "</tr>";
+        }
+        display.innerHTML = result;
+    }
+
+    function playGame(cell, x, y) {
+        // cell: this node
+        // x : tọa độ trục x của ô
+        // y: tọa độ trục y của ô
+        if (cell.innerText === "") {
+            if (turn === "X") {
+                cell.innerText = "X";
+                turn = "O";
+            } else {
+                cell.innerText = "O";
+                turn = "X";
+            }
+        }
+        // setTiemout để function playGame() chạy xong mới gọi đến các function check
+        setTimeout(() => {
+            checkNgang(x, y);
+            checkDoc(x, y);
+            checkCheo(x, y);
+            checkXien(x, y);
+        }, 0);
+    }
+
+    function checkNgang(x, y) {
+        let count = 1;
+        let i = 1;
+        let cell = document.getElementById(`cell-${x}-${y}`);
+        while (cell.innerText === document.getElementById(`cell-${x + i}-${y}`).innerText) {
+
+            count++
+            i++;
+        }
+        i = 1;
+        while (cell.innerText === document.getElementById(`cell-${x - i}-${y}`).innerText) {
+            count++
+            i++;
+        }
+        if (count >= 5) {
+            alert(cell.innerText + " win");
+            // setTimeout(function() {alert("win");},0);
+            drawTable();
+
+        }
+        // console.log(i);
+        console.log(count);
+        // console.log(cell.innerText);
+    }
+
+    // Hàm check dọc
+    function checkDoc(x, y) {
+
+        let count = 1;
+        let i = 1;
+        let cell = document.getElementById(`cell-${x}-${y}`);
+
+        while (cell.innerText === document.getElementById(`cell-${x}-${y + i}`).innerText) {
+
+            count++
+            i++;
+        }
+        i = 1;
+        while (cell.innerText === document.getElementById(`cell-${x}-${y - i}`).innerText) {
+            count++
+            i++;
+        }
+        if (count >= 5) {
+            alert(cell.innerText + " win");
+            // setTimeout(function() {alert("win");},0);
+            drawTable();
+
+        }
+        // console.log(i);
+        console.log(count);
+        // console.log(cell.innerText);
+    }
+
+    // Hàm check chéo
+    function checkCheo(x, y) {
+
+        let count = 1;
+        let i = 1;
+        let cell = document.getElementById(`cell-${x}-${y}`);
+
+        while (cell.innerText === document.getElementById(`cell-${x + i}-${y + i}`).innerText) {
+
+            count++
+            i++;
+        }
+        i = 1;
+        while (cell.innerText === document.getElementById(`cell-${x - i}-${y - i}`).innerText) {
+            count++
+            i++;
+        }
+        if (count >= 5) {
+            alert(cell.innerText + " win");
+            // setTimeout(function() {alert("win");},0);
+            drawTable();
+
+        }
+        // console.log(i);
+        console.log(count);
+        // console.log(cell.innerText);
+    }
+
+    // Hàm check chéo
+    function checkXien(x, y) {
+
+        let count = 1;
+        let i = 1;
+        let cell = document.getElementById(`cell-${x}-${y}`);
+
+        while (cell.innerText === document.getElementById(`cell-${x - i}-${y + i}`).innerText) {
+
+            count++
+            i++;
+        }
+        i = 1;
+        while (cell.innerText === document.getElementById(`cell-${x + i}-${y - i}`).innerText) {
+            count++
+            i++;
+        }
+        if (count >= 5) {
+            alert(cell.innerText + " win");
+            // setTimeout(function() {alert("win");},0);
+            drawTable();
+
+        }
+        // console.log(i);
+        console.log(count);
+        // console.log(cell.innerText);
+    }
+</script>
+</body>
+</html>

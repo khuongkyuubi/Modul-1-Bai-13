@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    const arr = [5, 12, 3, 5, 15, 45, 10, 22, 3, 5, 10];
+    console.log(arr);
+    let length = arr.length;
+    let index = false;
+    let number = +prompt("Nhập vào 1 số nguyên: ");
+    for (let i = 0; i < arr.length;) {
+        console.log(arr.length); // arr.length sẽ thay đổi mỗi lần xóa bớt 1 phần tử cuối đi
+
+        if (number === arr[i]) {
+            // nếu number == arr[i], xét từ vị trí i đấy đến hết rồi dồn các phần từ ở dưới lên
+            for (let j = i; j < arr.length; j++) {
+                arr[j] = arr[j + 1];
+            }
+            // nếu có number trong mảng thì i giữ nguyên, vì lúc
+            // này phần còn lại của mảng đã dịch về phía trái,
+            // phần tử i lúc này tương đương i + 1,vì vậy cần giữ
+            // nguyên i để xét
+            arr.pop(); // xóa đi phần tử cuối của mảng
+            // i giữ nguyên
+        } else {
+            i++; // nếu không tìm thấy number trong mảng thì tăng i lên bình thường;
+        }
+    }
+    console.log(arr);
+
+</script>
+</html>
