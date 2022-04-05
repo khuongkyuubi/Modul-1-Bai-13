@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<p id="display"></p>
+<button type="submit" id="changeValue" onclick="changeValue()">Change Value</button>
+
+</body>
+<script>
+    let row = 10;
+    let col = 10;
+    let space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    let result = "";
+    let display = document.getElementById("display");
+    let turn = "X";
+    let arr = new Array(row); // tạo mảng có row phần tử
+    for (let i = 0; i < row; i++) {
+        arr[i] = new Array(col); // mỗi phần tử là 1 mảng, mảng con có col phần tử
+        for (let j = 0; j < col; j++) {
+            arr[i][j] = "*"; // thêm giá trị 0 cho mỗi phần tử con
+        }
+        result += `${arr[i].join(space)}  <br>`
+    }
+    display.innerHTML = result;
+
+    function changeValue() {
+        let r = +prompt(`Lượt đi của ${turn}. Nhập vào vị trí hàng cần thay đổi (1 - ${row}): `);
+        // r -= r;
+        let c = +prompt(`Lượt đi của ${turn}. Nhập vào vị trí cột cần thay đổi (1 - ${col}): `);
+        // c-= c;
+        if (turn === "X") {
+            arr[r - 1][c - 1] = "X";
+            turn = "O";
+        } else {
+            arr[r - 1][c - 1] = "O";
+            turn = "X";
+        }
+        displayResult();
+        console.log(checkWin());
+
+        function checkWin() {
+            let index = true;
+            let count1 = 0;
+            let count2 = 0;
+            let count3 = 0;
+            // Check các giá trị nhỏ hơn
+            for (let i = -2; i < 0; i++) {
+                if (arr[r - 1][c - 1] === arr[r - 1][(c - 1) + i]) {
+                    index = false;
+                    count1++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][c - 1]) {
+                    index = false;
+                    count2++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][(c - 1) + i]) {
+                    index = false;
+                    count3++
+                }
+
+                if (count1 === 2 || count2 === 2 || count3 === 2) {
+                    return `Chúc mừng ${arr[r - 1][c - 1]} đã chiến thắng `;
+                }
+
+            }
+            count1 = 0;
+            count2 = 0;
+            count3 = 0;
+            // Check các giá trị lớn hơn
+
+            for (let i = -1; i <= 1; i++) {
+                if (i === 0) {
+                    continue;
+                }
+                if (arr[r - 1][c - 1] === arr[r - 1][(c - 1) + i]) {
+                    index = false;
+                    count1++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][c - 1]) {
+                    index = false;
+                    count2++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][(c - 1) + i]) {
+                    index = false;
+                    count3++
+                }
+
+                if (count1 === 2 || count2 === 2 || count3 === 2) {
+                    return `Chúc mừng ${arr[r - 1][c - 1]} đã chiến thắng `;
+                }
+            }
+
+            count1 = 0;
+            count2 = 0;
+            count3 = 0;
+            // Check các giá trị lớn hơn
+            for (let i = 1; i <= 2; i++) {
+                if (arr[r - 1][c - 1] === arr[r - 1][(c - 1) + i]) {
+                    index = false;
+                    count1++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][c - 1]) {
+                    index = false;
+                    count2++;
+                }
+                if (arr[r - 1][c - 1] === arr[(r - 1) + i][(c - 1) + i]) {
+                    index = false;
+                    count3++
+                }
+
+                if (count1 === 2 || count2 === 2 || count3 === 2) {
+                    return `Chúc mừng ${arr[r - 1][c - 1]} đã chiến thắng `;
+                }
+            }
+        }
+
+        function displayResult() {
+            display.innerHTML = "";
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (arr[i][j] === "*") {
+                        display.innerHTML += arr[i][j] + space;
+                    } else {
+                        display.innerHTML += arr[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    }
+
+                }
+                display.innerHTML += "<br>"
+            }
+        }
+    }
+
+    // function checkWin() {
+    //     if (arr[r - 1][c - 1 ==)
+    // }
+</script>
+</html>

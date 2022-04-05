@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    let str = prompt("Nhập vào 1 chuỗi");
+    let str2 = ""; // Biến lưu chuỗi sau khi đổi
+    const arr = str.split("");
+    let length = arr.length;
+    console.log(arr);
+
+    for (let i = 0; i < length; i++) {
+        if (arr[i] === arr[i].toLowerCase()) {
+            arr[i] = arr[i].toUpperCase();
+        } else {
+            arr[i] = arr[i].toLowerCase();
+        }
+    }
+    console.log(arr);
+    str2 = arr.join(""); // Nối phần tử của mảng thành chuỗi, với ngăn cách ""
+    alert(`${str} \nswapcase: \n${str2}`);
+</script>
+</html>

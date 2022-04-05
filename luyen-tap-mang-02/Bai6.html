@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    let length = +prompt("Nhập vào kích thước mảng ký tự: ");
+    let arr = [];
+    let temp = "";
+    let check = true;
+    for (let i = 0; i < length; i++) {
+        if (!check) {
+            arr = [];
+            break;
+        }
+        do {
+            temp = prompt("Nhập vào ký tự: ");
+            if (temp === null) {
+                console.log(temp);
+                alert("Bạn đã dừng chương trình");
+                check = false;
+                break;
+            } else if (temp.length !== 1 || temp === "") {
+                alert("Bạn phải nhập ký tự")
+            }
+        }
+        while (temp.length !== 1);
+        if (temp === "-") {
+            temp = "_";
+        }
+        arr[i] = temp;
+    }
+    console.log(arr);
+</script>
+</html>

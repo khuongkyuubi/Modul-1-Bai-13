@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<label>
+    <h2>Nhập từ cần dịch</h2><br>
+    <input type="text" name="input" id="input">
+</label><br>
+<button type="submit" onclick="trans()">Tra từ</button>
+<p id="translated"></p>
+
+</body>
+<script>
+    const enWords = ["Hello", "Hi", "One", "True"];
+    const viWords = ["Xin chào", "Chào", "Số một", "Đúng"];
+    let length = enWords.length;
+    let input = document.getElementById("input");
+    let translated = document.getElementById("translated");
+    let output = "";
+    let index = false;
+
+    function trans() {
+
+        for (let i = 0; i < length; i++) {
+            if (input.value.toLowerCase() === enWords[i].toLowerCase()) {
+                output = viWords[i];
+                index = true;
+                break;
+            }
+        }
+        if (index) {
+            translated.innerText = output;
+            index = false;
+        } else {
+            translated.innerText = "Not found";
+        }
+    }
+</script>
+</html>
